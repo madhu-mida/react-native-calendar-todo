@@ -13,6 +13,8 @@ const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [Linking.makeUrl('/')],
   config: {
     screens: {
+      Calendar: 'calendar',
+      Login: 'login',
       Main: 'main',
       Root: {
         screens: {
