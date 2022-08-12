@@ -6130,6 +6130,11 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
+moment@^2.29.4:
+  version "2.29.4"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
+  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz"
@@ -6943,6 +6948,11 @@ react-native-codegen@^0.0.17:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
+react-native-customize-selected-date@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-customize-selected-date/-/react-native-customize-selected-date-1.0.1.tgz#81226dc3c66c8cf9c973f55b90b78e6df36f2f25"
+  integrity sha512-zGPuRwV0B26sjKSgNIiYoNwGLelHgbehJvGH2HH+awgawDz11y6f+oyOWlQtQ6DFKBHohiDvJK0nbE79+caCEA==
+
 react-native-gradle-plugin@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.0.6.tgz#b61a9234ad2f61430937911003cddd7e15c72b45"
@@ -7004,6 +7014,13 @@ react-native-web@0.17.7:
     inline-style-prefixer "^6.0.0"
     normalize-css-color "^1.0.2"
     prop-types "^15.6.0"
+
+react-native-whc-calendar@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-whc-calendar/-/react-native-whc-calendar-1.0.6.tgz#3b4b4ecb6f2f195d7c7b60efaad574c13a3eb70f"
+  integrity sha512-1vEjUNNzTMIBEg1myqF3TsbMG2ug0dbHOhqRkBMZ1t56ymWyVZDquyn4kp8UJh4py2djbIzIQBMQivLcthX/4Q==
+  dependencies:
+    prop-types "^15.5.10"
 
 react-native@0.68.2:
   version "0.68.2"
