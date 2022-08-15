@@ -21,7 +21,8 @@ import LoginScreen from '../screens/LoginScreen'
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import CalendarScreen from '../screens/CalendarScreen';
-import CreateEventScreen from '../screens/createEventScreen';
+import CreateEventScreen from '../screens/CreateEventScreen';
+import EventsScreen from '../screens/EventsScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -42,8 +43,9 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name='Week' component={CreateEventScreen} options={{ headerShown: false }} />
       <Stack.Screen name='Calendar' component={CalendarScreen} options={{ headerShown: false }} />
+      <Stack.Screen name='Create' component={CreateEventScreen} options={{ headerShown: false }} />
+      <Stack.Screen name='Events' component={EventsScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />

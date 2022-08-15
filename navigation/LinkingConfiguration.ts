@@ -14,6 +14,7 @@ const linking: LinkingOptions<RootStackParamList> = {
   config: {
     screens: {
       Calendar: 'calendar',
+      Events: 'events',
       Login: 'login',
       Main: 'main',
       Root: {

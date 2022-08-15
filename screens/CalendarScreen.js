@@ -2,17 +2,17 @@ import { View } from "../components/Themed";
 import CalendarStrip from 'react-native-slideable-calendar-strip';
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { StyleSheet, Text, Dimensions, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, Dimensions, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { SimpleLineIcons, Fontisto, Ionicons } from '@expo/vector-icons';
 import Carousel from 'react-native-snap-carousel';
 import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards'
-
+import moment from 'moment';
 
 import * as Location from "expo-location";
 
-const CalendarScreen = () => {
+const CalendarScreen = ({ navigation }) => {
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     const [activeIndex, setActiveIndex] = useState(0);
@@ -21,30 +21,9 @@ const CalendarScreen = () => {
     const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.5);
     const ITEM_HEIGHT = Math.round(SLIDER_WIDTH * 0.4);
 
-    const carouselItems = [
-        {
-            title: "Item 1",
-            text: "Text 1",
-        },
-        {
-            title: "Item 2",
-            text: "Text 2",
-        },
-        {
-            title: "Item 3",
-            text: "Text 3",
-        },
-        {
-            title: "Item 4",
-            text: "Text 4",
-        },
-        {
-            title: "Item 5",
-            text: "Text 5",
-        },
-    ];
-
     const currentDate = new Date();
+
+    console.log(currentDate)
 
     const carouselRef = useRef(null);
 
@@ -66,6 +45,15 @@ const CalendarScreen = () => {
     // let day = today.getDay();
     //let date = today.getDate() + "/" + parseInt(today.getMonth() + 1) + "/" + today.getFullYear();
 
+    const [events, setEvents] = useState(null);
+
+    const URL = "https://ms-95-rn-calendar-todo.herokuapp.com/";
+
+    const getTodayEvents = async () => {
+        const data = await fetch(URL + "getEventByDate/" + moment().format('YYYY-MM-DD')).then(res => res.json());
+        console.log("data", data);
+        setEvents(data)
+    }
 
     async function getWeatherData(lat, long) {
         // let lat = lat;
@@ -108,6 +96,7 @@ const CalendarScreen = () => {
             console.log(location);
             getWeatherData(location.coords.latitude, location.coords.longitude);
             getNewsData();
+            getTodayEvents();
         })();
     }, []);
 
@@ -161,42 +150,64 @@ const CalendarScreen = () => {
                     </View>
                 </LinearGradient>
 
-                <View style={styles.planner}>
+                {/* <View style={styles.planner}>
                     <Text style={styles.plannerNote}>Preview of your day
                     </Text>
-                </View>
+                </View> */}
 
-                <View style={styles.preview}>
-                    <Text style={styles.plannerNote}> Nothing planned for today. Lucky you!
-                    </Text>
-                </View>
-
+                <TouchableOpacity
+                    onPress={() => {
+                        if (events) {
+                            navigation.navigate('Events', { eventSource: 'day' })
+                        }
+                    }}>
+                    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+                        colors={['rgb(82,82,166)', 'rgb(120,123,200)']} style={styles.preview}>
+                        <View style={styles.preview}>
+                            {events ? <Text style={styles.previewNote}>{events.length} event(s) waiting for you today!!</Text> : <Text style={styles.previewNote}> Nothing planned for today. Lucky you!
+                            </Text>}
+                        </View>
+                    </LinearGradient>
+                </TouchableOpacity>
 
                 <View style={styles.planner}>
                     <Text style={styles.plannerNote}>Explore your planner
                     </Text>
                 </View>
+
                 {/* <View style={styles.calenders}> */}
                 <View style={styles.calendarStyles}>
-                    <View style={{ backgroundColor: 'transparent' }}>
-                        <FontAwesome5 name="calendar-day" size={65} color="rgb(120,123,180)" />
-                        <Text style={{ textAlign: 'center', margin: 5 }}>Today</Text>
-                    </View>
-                    <View style={{ backgroundColor: 'transparent' }}>
-                        <FontAwesome5 name="calendar-week" size={65} color="rgb(120,123,180)" />
-                        <Text style={{ textAlign: 'center', margin: 5 }}>Week</Text>
-                    </View>
-                    <View style={{ backgroundColor: 'transparent' }}>
-                        <FontAwesome5 name="calendar-alt" size={65} color="rgb(120,123,180)" />
-                        <Text style={{ textAlign: 'center', margin: 5 }}>Month</Text>
-                    </View>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Events', { eventSource: 'day' })}>
+                        <View style={{ backgroundColor: 'transparent' }}>
+                            <FontAwesome5 name="calendar-day" size={65} color="rgb(120,123,180)" />
+                            <Text style={{ textAlign: 'center', margin: 5 }}>Today</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Events', { eventSource: 'week' })}>
+                        <View style={{ backgroundColor: 'transparent' }}>
+                            <FontAwesome5 name="calendar-week" size={65} color="rgb(120,123,180)" />
+                            <Text style={{ textAlign: 'center', margin: 5 }}>Week</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Events', { eventSource: 'month' })}>
+                        <View style={{ backgroundColor: 'transparent' }}>
+                            <FontAwesome5 name="calendar-alt" size={65} color="rgb(120,123,180)" />
+                            <Text style={{ textAlign: 'center', margin: 5 }}>Month</Text>
+                        </View>
+                    </TouchableOpacity>
 
 
-                </View>
+                </View >
                 {/* </View> */}
-                <View style={styles.mode}>
-                    <Text style={styles.modeText}>Focus Mode</Text>
-                </View>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Create')}>
+                    < View style={styles.mode} >
+                        <Text style={styles.modeText}>New Event</Text>
+                    </View >
+                </TouchableOpacity>
 
                 {weatherState && <View style={{
                     margin: 10,
@@ -240,16 +251,18 @@ const CalendarScreen = () => {
                 weekStartsOn={1} // 0,1,2,3,4,5,6 for S M T W T F S, defaults to 0
             /> */}
 
-                {newsDataState && <Carousel
-                    layout={"default"}
-                    ref={carouselRef}
-                    data={newsDataState}
-                    sliderWidth={SLIDER_WIDTH}
-                    itemWidth={ITEM_WIDTH}
-                    renderItem={renderItem}
-                    activeSlideAlignment={'start'}
-                    onSnapToItem={index => setActiveIndex(index)} />}
-            </ScrollView>
+                {
+                    newsDataState && <Carousel
+                        layout={"default"}
+                        ref={carouselRef}
+                        data={newsDataState}
+                        sliderWidth={SLIDER_WIDTH}
+                        itemWidth={ITEM_WIDTH}
+                        renderItem={renderItem}
+                        activeSlideAlignment={'start'}
+                        onSnapToItem={index => setActiveIndex(index)} />
+                }
+            </ScrollView >
         </SafeAreaView >
     );
 }
@@ -292,9 +305,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 60,
         backgroundColor: 'transparent',
-        borderWidth: 1,
-        borderStyle: 'dashed',
-        borderColor: 'black',
+        //borderWidth: 1,
+        //borderColor: 'black',
+        color: 'white',
         margin: 5,
         borderRadius: 8
     },
@@ -302,6 +315,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontStyle: 'italic',
         fontWeight: 'bold'
+    },
+    previewNote: {
+        fontSize: 16,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        color: 'white'
     },
     calendars: {
         justifyContent: 'center',
