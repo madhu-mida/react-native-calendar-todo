@@ -1,17 +1,21 @@
-import { View } from "../components/Themed";
+import { View, Text, useThemeColor } from "../components/Themed";
 import CalendarStrip from 'react-native-slideable-calendar-strip';
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { StyleSheet, Text, Dimensions, ScrollView, SafeAreaView, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, SafeAreaView, TextInput, TouchableOpacity, Alert } from 'react-native';
 
 import DateTime from 'react-native-customize-selected-date';
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
+import { Ionicons } from '@expo/vector-icons';
+
 
 const CreateEventScreen = ({ navigation, route }) => {
 
     const URL = "https://ms-95-rn-calendar-todo.herokuapp.com/";
+
+    const color = useThemeColor({ light: 'black', dark: 'white' }, 'text');
 
 
     const [selectedDate, setSelectedDate] = useState(route.params?.editEvent?.dateString ? route.params.editEvent.dateString : '');
@@ -138,7 +142,19 @@ const CreateEventScreen = ({ navigation, route }) => {
     return (
         <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
             <ScrollView contentContainerStyle={{ justifyContent: 'center' }}>
+                <View style={{ display: 'flex', flex: 1, alignItems: 'center', flexDirection: 'row' }}>
+                    <View style={{ flex: 0.4, justifyContent: 'left', flexDirection: 'row', marginLeft: 8 }}>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('Calendar')}>
+                            <Ionicons name="arrow-back-circle-sharp" size={26} color={color} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flex: 0.6, flexDirection: 'row', justifyContent: 'flex-start' }}>
+                        <Text style={{ justifyContent: 'center', textAlign: 'center', fontWeight: 'bold' }}>New Event</Text>
+                    </View>
+                </View>
                 <View style={styles.container}>
+
                     <DateTime
                         date={selectedDate}
                         changeDate={(date) => setSelectedDate(date)}

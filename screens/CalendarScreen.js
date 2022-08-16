@@ -1,8 +1,8 @@
-import { View } from "../components/Themed";
+import { View, Text } from "../components/Themed";
 import CalendarStrip from 'react-native-slideable-calendar-strip';
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { StyleSheet, Text, Dimensions, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { SimpleLineIcons, Fontisto, Ionicons } from '@expo/vector-icons';
@@ -23,7 +23,7 @@ const CalendarScreen = ({ navigation }) => {
 
     const currentDate = new Date();
 
-    console.log(currentDate)
+    //console.log(currentDate)
 
     const carouselRef = useRef(null);
 
@@ -51,7 +51,7 @@ const CalendarScreen = ({ navigation }) => {
 
     const getTodayEvents = async () => {
         const data = await fetch(URL + "getEventByDate/" + moment().format('YYYY-MM-DD')).then(res => res.json());
-        console.log("data", data);
+        //console.log("data", data);
         setEvents(data)
     }
 
@@ -63,9 +63,9 @@ const CalendarScreen = ({ navigation }) => {
         const weatherData = await fetch((weatherURL)).then(
             res => res.json()
         );
-        console.log(weatherData)
+        //console.log(weatherData)
         setWeatherState(weatherData)
-        console.log("WEATHERSTATE", weatherState)
+        //console.log("WEATHERSTATE", weatherState)
     }
 
     async function getNewsData() {
@@ -75,7 +75,7 @@ const CalendarScreen = ({ navigation }) => {
             res => res.json()
         );
 
-        console.log("NEWSDATA", newsData)
+        //console.log("NEWSDATA", newsData)
         setNewsDataState(newsData.articles);
     }
 
@@ -93,7 +93,7 @@ const CalendarScreen = ({ navigation }) => {
 
             let location = await Location.getCurrentPositionAsync({});
             setLocation(location);
-            console.log(location);
+            //console.log(location);
             getWeatherData(location.coords.latitude, location.coords.longitude);
             getNewsData();
             getTodayEvents();
@@ -181,21 +181,21 @@ const CalendarScreen = ({ navigation }) => {
                         onPress={() => navigation.navigate('Events', { eventSource: 'day' })}>
                         <View style={{ backgroundColor: 'transparent' }}>
                             <FontAwesome5 name="calendar-day" size={65} color="rgb(120,123,180)" />
-                            <Text style={{ textAlign: 'center', margin: 5 }}>Today</Text>
+                            <Text style={{ textAlign: 'center', margin: 5, color: 'black', fontWeight: '600' }}>Today</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('Events', { eventSource: 'week' })}>
                         <View style={{ backgroundColor: 'transparent' }}>
                             <FontAwesome5 name="calendar-week" size={65} color="rgb(120,123,180)" />
-                            <Text style={{ textAlign: 'center', margin: 5 }}>Week</Text>
+                            <Text style={{ textAlign: 'center', margin: 5, color: 'black', fontWeight: '600' }}>Week</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('Events', { eventSource: 'month' })}>
                         <View style={{ backgroundColor: 'transparent' }}>
                             <FontAwesome5 name="calendar-alt" size={65} color="rgb(120,123,180)" />
-                            <Text style={{ textAlign: 'center', margin: 5 }}>Month</Text>
+                            <Text style={{ textAlign: 'center', margin: 5, color: 'black', fontWeight: '600' }}>Month</Text>
                         </View>
                     </TouchableOpacity>
 
@@ -314,7 +314,8 @@ const styles = StyleSheet.create({
     plannerNote: {
         fontSize: 16,
         fontStyle: 'italic',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: 'black'
     },
     previewNote: {
         fontSize: 16,
