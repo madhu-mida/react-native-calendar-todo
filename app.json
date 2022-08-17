@@ -1,11 +1,12 @@
 {
   "expo": {
-    "name": "my-react-native-calendar-todo",
-    "slug": "my-react-native-calendar-todo",
+    "name": "rn-calendar-todo",
+    "slug": "rn-calendar-todo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
+    "owner": "madhumida",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",

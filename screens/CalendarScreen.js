@@ -1,4 +1,4 @@
-import { View, Text } from "../components/Themed";
+import { View, Text, useThemeColor } from "../components/Themed";
 import CalendarStrip from 'react-native-slideable-calendar-strip';
 import React from "react";
 import { useState, useEffect, useRef } from "react";
@@ -16,6 +16,8 @@ const CalendarScreen = ({ navigation }) => {
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     const [activeIndex, setActiveIndex] = useState(0);
+
+    const iconColor = useThemeColor({ light: 'black', dark: 'white' }, 'text');
 
     const SLIDER_WIDTH = Dimensions.get('window').width;
     const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.5);
@@ -211,21 +213,22 @@ const CalendarScreen = ({ navigation }) => {
 
                 {weatherState && <View style={{
                     margin: 10,
-                    borderRadius: 8, height: 100, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'
+                    borderRadius: 8, height: 100, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center',
+                    backgroundColor: 'white'
                 }}>
-                    <View style={{ margin: 5 }}>
-                        <Text style={{ fontSize: 28 }}>{weatherState.main.temp}&deg;F</Text>
-                        <Text style={{ textAlign: 'center' }}>Feels Like:</Text>
-                        <Text style={{ textAlign: 'center' }}>{weatherState.main.feels_like}</Text>
+                    <View style={{ margin: 5, backgroundColor: 'white' }}>
+                        <Text style={{ fontSize: 28, color: 'black' }}>{weatherState.main.temp}&deg;F</Text>
+                        <Text style={{ textAlign: 'center', color: 'black' }}>Feels Like:</Text>
+                        <Text style={{ textAlign: 'center', color: 'black' }}>{weatherState.main.feels_like}</Text>
                     </View>
-                    <View style={{ margin: 5 }}>
-                        {weatherState.weather[0].description && weatherState.weather[0].description.includes("cloud") && <Fontisto name="day-cloudy" size={60} color="black" />}
-                        {weatherState.weather[0].description && weatherState.weather[0].description.includes("rain") && <Ionicons name="rainy" size={60} color="black" />}
-                        {weatherState.weather[0].description && weatherState.weather[0].description.includes("sun") && <Ionicons name="sunny" size={60} color="black" />}
+                    <View style={{ margin: 5, backgroundColor: 'white' }}>
+                        {weatherState.weather[0].description && weatherState.weather[0].description.includes("cloud") && <Fontisto name="day-cloudy" size={60} color='black' />}
+                        {weatherState.weather[0].description && weatherState.weather[0].description.includes("rain") && <Ionicons name="rainy" size={60} color='black' />}
+                        {weatherState.weather[0].description && weatherState.weather[0].description.includes("sun") && <Ionicons name="sunny" size={60} color='black' />}
                     </View>
-                    <View style={{ margin: 5 }}>
-                        <Text style={{ fontSize: 25 }}>{weatherState.weather[0].description}</Text>
-                        <Text style={{ textAlign: 'center' }}>Humidity: {weatherState.main.humidity}&deg;F</Text>
+                    <View style={{ margin: 5, backgroundColor: 'white' }}>
+                        <Text style={{ fontSize: 25, color: 'black' }}>{weatherState.weather[0].description}</Text>
+                        <Text style={{ textAlign: 'center', color: 'black' }}>Humidity: {weatherState.main.humidity}&deg;F</Text>
                         {/* <Text>Temperature-Max: {weatherState.main.temp_max}&deg;F</Text>
                     <Text>Temperature-Min: {weatherState.main.temp_min}&deg;F</Text> */}
                     </View>
@@ -280,6 +283,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         color: 'white',
         marginTop: 30,
+        marginBottom: 5
     },
     today: {
         color: 'white',

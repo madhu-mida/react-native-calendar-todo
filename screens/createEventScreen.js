@@ -18,7 +18,7 @@ const CreateEventScreen = ({ navigation, route }) => {
     const color = useThemeColor({ light: 'black', dark: 'white' }, 'text');
 
 
-    const [selectedDate, setSelectedDate] = useState(route.params?.editEvent?.dateString ? route.params.editEvent.dateString : '');
+    const [selectedDate, setSelectedDate] = useState(route.params?.editEvent?.dateString ? route.params.editEvent.dateString : moment(new Date()).format('YYYY-MM-DD'));
 
     const [text, onChangeText] = React.useState(null);
 
@@ -61,7 +61,17 @@ const CreateEventScreen = ({ navigation, route }) => {
     const [selectedEndTime, setSelectedEndTime] = useState(route.params?.editEvent?.endTime ? route.params.editEvent.endTime : '');
 
     const showEndDatePicker = () => {
-        setEndDatePickerVisibility(true);
+        if (selectedStartTime) {
+            setEndDatePickerVisibility(true);
+        } else {
+            Alert.alert(
+                "Warning",
+                "Please Select a Start Time",
+                [
+                    { text: "OK" }
+                ]
+            );
+        }
     };
 
     const hideEndDatePicker = () => {
@@ -69,8 +79,22 @@ const CreateEventScreen = ({ navigation, route }) => {
     };
 
     const handleEndConfirm = (date) => {
-        setSelectedEndTime(moment(date).format('hh:mm A'));
-        hideEndDatePicker();
+        let startDate = moment(selectedDate + ' ' + selectedStartTime, "YYYY-MM-DD hh:mm A");
+        let endTime = moment(date).format('hh:mm A');
+        let endDate = moment(selectedDate + ' ' + endTime, "YYYY-MM-DD hh:mm A");
+        //console.log("startDate :: ", startDate, endDate, endDate.isSameOrBefore(startDate));
+        if (endDate.isSameOrBefore(startDate)) {
+            Alert.alert(
+                "Error",
+                "End Time must be after Start Time",
+                [
+                    { text: "OK" }
+                ]
+            );
+        } else {
+            setSelectedEndTime(endTime);
+            hideEndDatePicker();
+        }
     };
 
     function renderChildDay() {
@@ -169,6 +193,7 @@ const CreateEventScreen = ({ navigation, route }) => {
                         onChangeText={(val) => setTitle(val)}
                         value={title}
                         placeholder="Title"
+                        color={color}
                     />
                 </View>
 
@@ -200,6 +225,7 @@ const CreateEventScreen = ({ navigation, route }) => {
                         onChangeText={(val) => setDescription(val)}
                         value={description}
                         placeholder="Description"
+                        color={color}
                     />
                 </View>
 
@@ -229,6 +255,8 @@ const CreateEventScreen = ({ navigation, route }) => {
                         onTouchStart={showStartDatePicker}
                         value={selectedStartTime}
                         placeholder="Start Time"
+                        color={color}
+                        editable={false}
                     />
                     <DateTimePickerModal
                         isVisible={isStartDatePickerVisible}
@@ -245,6 +273,8 @@ const CreateEventScreen = ({ navigation, route }) => {
                         onTouchStart={showEndDatePicker}
                         value={selectedEndTime}
                         placeholder="End Time"
+                        color={color}
+                        editable={false}
                     />
                     <DateTimePickerModal
                         isVisible={isEndDatePickerVisible}
