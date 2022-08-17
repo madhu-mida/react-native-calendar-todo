@@ -301,7 +301,8 @@ const CreateEventScreen = ({ navigation, route }) => {
                             alignSelf: 'center',
                             marginBottom: 10
                         }}>
-                        <Text style={{ fontSize: 14, color: '#fff' }}>Add</Text>
+
+                        <Text style={{ fontSize: 14, color: '#fff' }}>Save</Text>
                     </TouchableOpacity>
                 </View>
 
