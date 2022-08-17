@@ -8,7 +8,7 @@ Midz Calendar is a full CRUD Mobile application that stores and handles todos of
 
 ![Screenshot](rn-cal.png)
 
-![Screenshot](rn-cal-event-create.png)
+![Screenshot](rn-cal-create-event.png)
 
 ![Screenshot](rn-cal-events.png)
 
