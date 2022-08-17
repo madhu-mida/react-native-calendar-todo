@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
         //borderWidth: 1,
         borderRadius: 15,
         borderColor: 'black',
-        fontFamily: 'Roboto_500Medium',
+        fontFamily: 'Roboto_500Medium_Italic',
         textTransform: 'capitalize',
         color: 'grey',
         fontStyle: 'italic'

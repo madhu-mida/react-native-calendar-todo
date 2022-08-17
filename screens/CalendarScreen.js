@@ -143,11 +143,11 @@ const CalendarScreen = ({ navigation }) => {
                             {date}
                         </Text>
                         {weatherState && <Text>
-                            <Text style={{ textAlign: 'center', fontStyle: 'italic' }}>{weatherState.name},{weatherState.main.temp}&deg;F</Text>
+                            <Text style={{ textAlign: 'center', fontFamily: 'Roboto_500Medium_Italic', fontStyle: 'italic' }}>{weatherState.name}, {weatherState.main.temp}&deg;F</Text>
                         </Text>}
                         {weatherState && <Text>
 
-                            <Text style={{ textAlign: 'center', fontStyle: 'italic' }}>{weatherState.weather[0].main}</Text>
+                            <Text style={{ textAlign: 'center', fontFamily: 'Roboto_500Medium_Italic', fontStyle: 'italic' }}>{weatherState.weather[0].main}</Text>
                         </Text>}
                     </View>
                 </LinearGradient>
@@ -219,7 +219,7 @@ const CalendarScreen = ({ navigation }) => {
                     <View style={{ margin: 5, backgroundColor: 'white' }}>
                         <Text style={{ fontSize: 28, color: 'black' }}>{weatherState.main.temp}&deg;F</Text>
                         <Text style={{ textAlign: 'center', color: 'black' }}>Feels Like:</Text>
-                        <Text style={{ textAlign: 'center', color: 'black' }}>{weatherState.main.feels_like}</Text>
+                        <Text style={{ textAlign: 'center', color: 'black' }}>{weatherState.main.feels_like}&deg;F</Text>
                     </View>
                     <View style={{ margin: 5, backgroundColor: 'white' }}>
                         {weatherState.weather[0].description && weatherState.weather[0].description.includes("cloud") && <Fontisto name="day-cloudy" size={60} color='black' />}
