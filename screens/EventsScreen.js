@@ -26,9 +26,12 @@ const EventsScreen = ({ navigation, route }) => {
 
     const URL = "https://ms-95-rn-calendar-todo.herokuapp.com/";
 
+    const todayDt = moment().format('YYYY-MM-DD');
+
     const getEventsByDate = async () => {
         const data = await fetch(URL + "getEventByDate/" + moment().format('YYYY-MM-DD')).then(res => res.json());
         console.log("data", data);
+        data.sort((elem1, elem2) => (elem1.dateString > elem2.dateString && elem1.startTime > elem2.startTime));
         setEvents(data)
     }
 
@@ -44,6 +47,7 @@ const EventsScreen = ({ navigation, route }) => {
         setStartDate(startDateMoment.format('MM-DD-YYYY'));
         setEndDate(endDateMoment.format('MM-DD-YYYY'));
         const data = await fetch(`${URL}getEventByDateRange/${startDateMoment.format('YYYY-MM-DD')}/${endDateMoment.format('YYYY-MM-DD')}`).then(res => res.json());
+        data.sort((elem1, elem2) => (elem1.dateString > elem2.dateString && elem1.startTime > elem2.startTime));
         setEvents(data)
     }
 
@@ -133,6 +137,9 @@ const EventsScreen = ({ navigation, route }) => {
 
                     </View>
                     {events && events.map((event) => {
+                        if (event.dateString < todayDt) {
+                            return (<></>);
+                        }
                         return (
                             <View style={{ maxHeight: 200 }} key={`view-${event._id}`}>
                                 <Card style={{
@@ -192,6 +199,7 @@ const EventsScreen = ({ navigation, route }) => {
                                         <TouchableOpacity
                                             onPress={() => { handleEdit(event) }}
                                             style={{ flex: 0.9, alignItems: 'left', marginLeft: 15 }}
+                                            disabled={event.dateString < todayDt}
                                         >
                                             <View>
                                                 <MaterialIcons name="edit" size={21} color="grey" />
@@ -200,6 +208,7 @@ const EventsScreen = ({ navigation, route }) => {
                                         <TouchableOpacity
                                             onPress={() => { handleDelete(event._id) }}
                                             style={{ flex: 0.1, alignItems: 'right', justifyContent: 'flex-end' }}
+                                            disabled={event.dateString < todayDt}
                                         >
                                             <View >
                                                 <MaterialIcons name="delete" size={21} color="grey" />

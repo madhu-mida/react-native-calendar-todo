@@ -9,6 +9,7 @@ import { SimpleLineIcons, Fontisto, Ionicons } from '@expo/vector-icons';
 import Carousel from 'react-native-snap-carousel';
 import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards'
 import moment from 'moment';
+import { useIsFocused } from '@react-navigation/native'
 
 import * as Location from "expo-location";
 
@@ -18,6 +19,8 @@ const CalendarScreen = ({ navigation }) => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const iconColor = useThemeColor({ light: 'black', dark: 'white' }, 'text');
+
+    const screenFocused = useIsFocused();
 
     const SLIDER_WIDTH = Dimensions.get('window').width;
     const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.5);
@@ -53,7 +56,7 @@ const CalendarScreen = ({ navigation }) => {
 
     const getTodayEvents = async () => {
         const data = await fetch(URL + "getEventByDate/" + moment().format('YYYY-MM-DD')).then(res => res.json());
-        //console.log("data", data);
+        console.log("data", data);
         setEvents(data)
     }
 
@@ -98,9 +101,14 @@ const CalendarScreen = ({ navigation }) => {
             //console.log(location);
             getWeatherData(location.coords.latitude, location.coords.longitude);
             getNewsData();
-            getTodayEvents();
         })();
     }, []);
+
+    useEffect(() => {
+        if (screenFocused) {
+            getTodayEvents();
+        }
+    }, [screenFocused]);
 
     let text = 'Waiting..';
     if (errorMsg) {
@@ -283,7 +291,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         color: 'white',
         marginTop: 30,
-        marginBottom: 5
+        marginBottom: 5,
     },
     today: {
         color: 'white',

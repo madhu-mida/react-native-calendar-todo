@@ -19,19 +19,9 @@ Midz Calendar is a full CRUD Mobile application that stores and handles todos of
 
 ### Home Page
 
-![Screenshot](index.png)
+![Screenshot](Home.png)
 
-### Create Page
 
-![Screenshot](create.png)
-
-### Edit Page
-
-![Screenshot](edit.png)
-
-### Show Page
-
-![Screenshot](show.png)
 
 
 ## User Stories
