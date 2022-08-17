@@ -46,7 +46,7 @@ Midz Calendar is a full CRUD Mobile application that stores and handles todos of
 
 ## Technologies Used
 
-Expo
+* Expo
 
 ### API
 
