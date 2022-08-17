@@ -10,8 +10,6 @@ Midz Calendar is a full CRUD Mobile application that stores and handles todos of
 
 ![Screenshot](rn-cal-event-create.png)
 
-### Trello
-
 ![Screenshot](rn-cal-events.png)
 
 ---
@@ -39,15 +37,21 @@ Midz Calendar is a full CRUD Mobile application that stores and handles todos of
 ## User Stories
 
 ### As a user, I want to:
-* view my todos displayed on events page.  
-* create a todo 
-* update or delete a todo on card. 
+* select a date from the calendar
+* create a todo
+* view my todos displayed on events page  
+* update or delete a todo on card
 
 ---
 
 ## Technologies Used
 
 Expo
+
+### API
+
+WeatherAPI
+NewsAPI
 
 ### Backend
 
@@ -71,6 +75,8 @@ React Vector Icons
 [Click Here](https://github.com/madhu-mida/react-native-calendar-todo-backend) to see backend Repo.
 
 [Click Here](https://github.com/madhu-mida/react-native-calendar-todo) to see frontend Repo.
+
+[Click Here](https://trello.com/b/30qVxQWJ/rn-midz-calendar) to see trello.
 
 [Click Here](https://expo.dev/@madhumida/rn-calendar-todo?serviceType=classic&distribution=expo-go ) to see deployed expo app.
 
