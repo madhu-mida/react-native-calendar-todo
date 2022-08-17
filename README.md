@@ -50,22 +50,23 @@ Expo
 
 ### API
 
-WeatherAPI
-NewsAPI
+* WeatherAPI
+* NewsAPI
 
 ### Backend
 
-Express
-NodeJS
-Mongoose
-MongoDB
+* Express
+* NodeJS
+* Mongoose
+* MongoDB
 
 ### Frontend
 
-React Native 
-Materialise Cards
-CSS
-React Vector Icons
+* React Native 
+* Materialise Cards
+* CSS
+* React Vector Icons
+* Google Fonts
 
 ---
 
